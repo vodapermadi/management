@@ -17,16 +17,17 @@ export const POST = async (req) => {
         const body = await req.json()
         await connect()
         await Money.create(body)
-
+        
         return NextResponse.json({
             message: "success",
             status: true
-        }, { status: 201 })
+        }, { status: 200 })
     } catch (error) {
+        console.log(error)
         return NextResponse.json({
             message: "Add Data Failed",
             status: false
-        }, { status: 404 })
+        }, { status: 500 })
     }
 }
 
@@ -40,7 +41,7 @@ export const PUT = async(req) => {
         return NextResponse.json({
             message: "Get Data Failed",
             status: false
-        }, { status: 404 })
+        }, { status: 500 })
     }
 }
 
@@ -52,11 +53,11 @@ export const DELETE = async(req) => {
         return NextResponse.json({
             message: "success",
             status: true
-        }, { status: 201 })
+        }, { status: 200 })
     } catch (error) {
         return NextResponse.json({
             message: "Delete Data Failed",
             status: false
-        }, { status: 404 })
+        }, { status: 500 })
     }
 }

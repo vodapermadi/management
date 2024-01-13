@@ -69,22 +69,23 @@ const MoneysPage = () => {
                 saldo: Number(oldSaldo) - Number(value.amount)
             }
         }
+
         const { data } = await axios.post('/api/money', newValue)
         if (data.status) {
             setMessage({
                 status: true,
                 message: data.message
             })
-            window.alert(data.message)
+
             setInterval(() => {
                 window.location.reload()
             }, 800)
+
         } else {
             setMessage({
-                status: true,
+                status: false,
                 message: data.message
             })
-            window.alert(message)
         }
     }
 
@@ -94,21 +95,21 @@ const MoneysPage = () => {
                 id:id
             }
         })
+        
         if (data.status) {
             setMessage({
                 status: true,
                 message: data.message
             })
-            window.alert(data.message)
+
             setInterval(() => {
                 window.location.reload()
             }, 800)
         } else {
             setMessage({
-                status: true,
+                status: false,
                 message: data.message
             })
-            window.alert(message)
         }
     }
 
@@ -117,12 +118,13 @@ const MoneysPage = () => {
         const { data } = await axios.get('/api/money')
         setMoney(data)
     }
+
     return (
         <div className="w-full px-4 py-8">
             <div className="w-full flex flex-col justify-center items-start gap-4">
                 <h2 className="font-bold text-xl px-2">Money Management</h2>
                 <div className="w-full flex justify-center items-center">
-                    <div className="sm:w-1/2 w-full">
+                    <div className="md:w-1/2 w-full">
                         <FormCreate options={formMoney} addData={handleAddMoney} />
                     </div>
                 </div>
