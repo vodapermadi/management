@@ -1,21 +1,16 @@
 "use client"
-import axios from "axios"
 import React, { useEffect, useState } from 'react'
 import { SingleData } from "@/components"
+import { singleData } from "@/utils/action"
 
 const MoneySingleData = ({ params }) => {
     const [data, setData] = useState()
 
     useEffect(() => {
-        getMoney(params.id)
-    }, [])
-
-    const getMoney = async (id) => {
-        const { data } = await axios.put('/api/money', {
-            id: id
+        singleData(params.id,'/api/money').then((res) => {
+            setData(res)
         })
-        setData(data)
-    }
+    }, [])
 
     const options = [
         {
